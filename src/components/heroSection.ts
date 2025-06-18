@@ -2,7 +2,7 @@ import heroImage from "../images/hero-image.png";
 
 export function heroSection() {
   return `
-    <div class="container even-columns items-center my-20">
+    <section aria-label="Hero" class="container even-columns items-center my-20">
         <div>
           <h1 class="font-bold text-3xl md:text-[3.2rem] md:leading-normal">
             Deploy Anywhere Perform Everywhere.
@@ -18,6 +18,6 @@ export function heroSection() {
           </button>
         </div>
         <img class="max-md:mt-10" src="${heroImage}" alt="Portable Edge Datacenter" />
-      </div>
+      </section>
     `;
 }

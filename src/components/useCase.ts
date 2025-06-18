@@ -46,9 +46,9 @@ function mapUseCases(items: IUseCase[]) {
 
 export function useCaseSection() {
   return `
-    <div class="container my-20">
+    <section  aria-labelledby="use-cases-heading" class="container my-20">
     <div class="flex max-md:flex-col justify-between items-center">
-        <h2 class="font-bold text-2xl md:text-[3.5rem] text-grey">
+        <h2 id="use-cases-heading" class="font-bold text-2xl md:text-[3.5rem] text-grey">
           Use Cases
         </h2>
          <button
@@ -57,9 +57,9 @@ export function useCaseSection() {
             Talk to an expert
           </button>
         </div>
-        <ul class="grid grid-cols-1 md:grid-cols-2 gap-7 mt-14">
+        <ul role="list" aria-label="Use case examples" class="grid grid-cols-1 md:grid-cols-2 gap-7 mt-14">
             ${mapUseCases(useCases).join("")}
         </ul>
-      </div>
+      </section>
   `;
 }

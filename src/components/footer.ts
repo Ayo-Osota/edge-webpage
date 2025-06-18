@@ -11,6 +11,7 @@ export function footer() {
             Ready to deploy in minutes?
           </p>
           <button
+            type="button"
             class="cursor-pointer mt-6 bg-primary rounded-2xl p-3 md:p-5 w-full max-w-[305px] text-white font-semibold text-sm font-serif"
           >
             Contact sales

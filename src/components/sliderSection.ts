@@ -14,7 +14,7 @@ export function sliderSection() {
           </p>
 
           <div
-            class="even-columns bg-primary rounded-2xl px-6 py-8 bg-grey mt-20"
+            class="even-columns bg-primary rounded-2xl px-6 py-8 mt-20"
           >
             <div class="bg-[#E0B123] rounded-2xl">
               <img src="${image}" alt="H Bench and Edc" />
