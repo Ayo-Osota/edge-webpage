@@ -1,4 +1,5 @@
 import type { IUseCase } from "../interface";
+import blurImage from "../images/blur-effect.svg";
 
 const useCases: IUseCase[] = [
   {
@@ -47,6 +48,11 @@ function mapUseCases(items: IUseCase[]) {
 export function useCaseSection() {
   return `
     <section  aria-labelledby="use-cases-heading" class="container my-20">
+    <img 
+        src="${blurImage}" 
+        alt="Blur Image" 
+        class="absolute left-1/2 -translate-x-1/2 -z-10"
+      >
     <div class="flex max-md:flex-col justify-between items-center">
         <h2 id="use-cases-heading" class="font-bold text-2xl md:text-[3.5rem] text-grey">
           Use Cases

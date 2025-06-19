@@ -1,8 +1,14 @@
 import heroImage from "../images/hero-image.png";
+import blurImage from "../images/blur-effect.svg";
 
 export function heroSection() {
   return `
     <section aria-label="Hero" class="container even-columns items-center my-20">
+      <img 
+        src="${blurImage}" 
+        alt="Blur Image" 
+        class="absolute left-1/2 -translate-x-1/2 -top-[757px] -z-10"
+      >
         <div>
           <h1 class="font-bold text-3xl md:text-[3.2rem] md:leading-normal">
             Deploy Anywhere Perform Everywhere.
