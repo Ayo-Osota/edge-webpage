@@ -1,4 +1,4 @@
-# 🔐 Securicore Login System
+# 🎨 Securicore EDC Webpage
 
 A simple one-page responsive landing page built with Vite and Tailwind CSS (CDN), showcasing the EDC design based on provided assets. Designed for the Securicore Junior Frontend Developer Assessment.
 
