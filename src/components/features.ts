@@ -32,7 +32,7 @@ function mapFeatures(items: IFeatureItem[]) {
     ({ id, icon, title, description }) => `
     <li
       key="${id}"
-      class="bg-white border border-grey/20 rounded-2xl py-10 px-6"
+      class="bg-white border border-grey/20 rounded-2xl py-10 px-6 transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl"
       role="group" 
       aria-label="Feature: Tool-Free Setup"
     >

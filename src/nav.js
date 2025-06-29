@@ -1,0 +1,273 @@
+document.addEventListener("DOMContentLoaded", () => {
+  // DOM Elements
+  const navbar = document.getElementById("navbar");
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const navLinks = document.querySelectorAll(".nav-link");
+  const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+  const sections = document.querySelectorAll("section");
+  const bgElements = document.querySelectorAll(".fixed > div");
+
+  // Mobile Menu Toggle
+  mobileMenuButton.addEventListener("click", () => {
+    mobileMenuButton.classList.toggle("active");
+
+    if (mobileMenu.classList.contains("open")) {
+      mobileMenu.style.height = "0";
+      mobileMenu.classList.remove("open");
+    } else {
+      mobileMenu.classList.add("open");
+      mobileMenu.style.height = `${mobileMenu.scrollHeight}px`;
+    }
+  });
+
+  // Close mobile menu when a link is clicked
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenuButton.classList.remove("active");
+      mobileMenu.style.height = "0";
+      mobileMenu.classList.remove("open");
+    });
+  });
+
+  // Navbar scroll effect
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+
+    highlightCurrentSection();
+  });
+
+  // Smooth scroll for nav links
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href");
+      const targetSection = document.querySelector(targetId);
+
+      if (targetSection) {
+        const offsetTop = targetSection.offsetTop - 70; // Adjust for navbar height
+        window.scrollTo({
+          top: offsetTop,
+          behavior: "smooth",
+        });
+
+        // Highlight the section briefly
+        targetSection.classList.add("section-highlight");
+        setTimeout(() => {
+          targetSection.classList.remove("section-highlight");
+        }, 1000);
+      }
+    });
+  });
+
+  // Highlight active section in navbar
+  function highlightCurrentSection() {
+    let current = "";
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+
+      if (
+        window.scrollY >= sectionTop &&
+        window.scrollY < sectionTop + sectionHeight
+      ) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+
+    mobileNavLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+  // Parallax effect for background elements
+  /*
+    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      document.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        
+        bgElements.forEach(element => {
+          const speed = 20; // Adjust for more or less movement
+          const xOffset = (x - 0.5) * speed;
+          const yOffset = (y - 0.5) * speed;
+          
+          element.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+        });
+      });
+    }
+    */
+
+  // Scroll animations for sections
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("section-visible");
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  sections.forEach((section) => {
+    section.classList.add("section-hidden");
+    observer.observe(section);
+  });
+
+  // Initialize active section on page load
+  highlightCurrentSection();
+
+  // Make header text visible with animation
+  setTimeout(() => {
+    const headerText = document.querySelector(".text-6xl");
+    if (headerText) {
+      headerText.style.opacity = 1;
+      headerText.style.transform = "translateY(0)";
+    }
+  }, 300);
+
+  const teamMembers = [
+    { name: "Emily Kim", role: "Founder" },
+    { name: "Michael Steward", role: "Creative Director" },
+    { name: "Emma Rodriguez", role: "Lead Developer" },
+    { name: "Julia Gimmel", role: "UX Designer" },
+    { name: "Lisa Anderson", role: "Marketing Manager" },
+    { name: "James Wilson", role: "Product Manager" },
+  ];
+
+  const cards = document.querySelectorAll(".card");
+  const dots = document.querySelectorAll(".dot");
+  const memberName = document.querySelector(".member-name");
+  const memberRole = document.querySelector(".member-role");
+  const leftArrow = document.querySelector(".nav-arrow.left");
+  const rightArrow = document.querySelector(".nav-arrow.right");
+
+  let currentIndex = 0;
+  let isAnimating = false;
+
+  function updateCarousel(newIndex) {
+    console.log(`Updating carousel to index: ${newIndex}`);
+
+    if (isAnimating) return;
+    isAnimating = true;
+
+    currentIndex = (newIndex + cards.length) % cards.length;
+
+    cards.forEach((card, i) => {
+      const offset = (i - currentIndex + cards.length) % cards.length;
+
+      card.classList.remove(
+        "center",
+        "left-1",
+        "left-2",
+        "right-1",
+        "right-2",
+        "hidden"
+      );
+
+      if (offset === 0) {
+        card.classList.add("center");
+      } else if (offset === 1) {
+        card.classList.add("right-1");
+      } else if (offset === 2) {
+        card.classList.add("right-2");
+      } else if (offset === cards.length - 1) {
+        card.classList.add("left-1");
+      } else if (offset === cards.length - 2) {
+        card.classList.add("left-2");
+      } else {
+        card.classList.add("hidden");
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentIndex);
+    });
+
+    memberName.style.opacity = "0";
+    memberRole.style.opacity = "0";
+
+    setTimeout(() => {
+      memberName.textContent = teamMembers[currentIndex].name;
+      memberRole.textContent = teamMembers[currentIndex].role;
+      memberName.style.opacity = "1";
+      memberRole.style.opacity = "1";
+    }, 300);
+
+    setTimeout(() => {
+      isAnimating = false;
+    }, 800);
+  }
+
+  leftArrow.addEventListener("click", () => {
+    console.log("Left arrow clicked");
+    updateCarousel(currentIndex - 1);
+  });
+
+  rightArrow.addEventListener("click", () => {
+    updateCarousel(currentIndex + 1);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      updateCarousel(i);
+    });
+  });
+
+  cards.forEach((card, i) => {
+    card.addEventListener("click", () => {
+      updateCarousel(i);
+    });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      updateCarousel(currentIndex - 1);
+    } else if (e.key === "ArrowRight") {
+      updateCarousel(currentIndex + 1);
+    }
+  });
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  document.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        updateCarousel(currentIndex + 1);
+      } else {
+        updateCarousel(currentIndex - 1);
+      }
+    }
+  }
+
+  updateCarousel(0);
+});

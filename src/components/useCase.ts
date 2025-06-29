@@ -32,7 +32,7 @@ function mapUseCases(items: IUseCase[]) {
   return items.map(
     (item) => `
         <li
-        class="bg-white border-[0.3px] border-grey/20 rounded-2xl py-10 px-6"
+        class="bg-white border-[0.3px] border-grey/20 rounded-2xl py-10 px-6 transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl"
         >
         <h3 class="font-serif font-medium text-xl md:text-4xl text-grey/90">
             ${item.title}
@@ -58,7 +58,7 @@ export function useCaseSection() {
           Use Cases
         </h2>
          <button
-            class="cursor-pointer bg-primary rounded-2xl p-3 md:p-5 w-full max-w-[305px] text-white font-semibold text-sm font-serif max-md:mt-5"
+            class="cursor-pointer bg-primary  hover:bg-primary/80 rounded-2xl p-3 md:p-5 w-full max-w-[305px] text-white font-semibold text-sm font-serif max-md:mt-5"
           >
             Talk to an expert
           </button>

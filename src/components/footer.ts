@@ -12,7 +12,7 @@ export function footer() {
           </p>
           <button
             type="button"
-            class="cursor-pointer mt-6 bg-primary rounded-2xl p-3 md:p-5 w-full max-w-[305px] text-white font-semibold text-sm font-serif"
+            class="cursor-pointer mt-6 bg-primary hover:bg-primary/80 rounded-2xl p-3 md:p-5 w-full max-w-[305px] text-white font-semibold text-sm font-serif"
           >
             Contact sales
           </button>
